@@ -31,7 +31,7 @@ const Boxs = styled(Box)`
   padding-bottom: 40px !important;
 `;
 
-export default function Join() {
+function Join() {
   const theme = createTheme();
 
   // 유효성 검사 useState 추가
@@ -153,10 +153,10 @@ export default function Join() {
                 <Grid item xs={12}>
                   <TextField
                     autoComplete="given-name"
-                    name="firstName"
+                    name="name"
                     required
                     fullWidth
-                    id="firstName"
+                    id="name"
                     label="이름"
                     autoFocus
                     error={nameError !== "" || false}
@@ -259,3 +259,4 @@ export default function Join() {
     </ThemeProvider>
   );
 }
+export default Join;
