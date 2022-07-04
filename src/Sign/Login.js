@@ -26,14 +26,28 @@ const FormHelperTexts = styled(FormHelperText)`
 `;
 
 function Login() {
+  // color, font 설정
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#005cb8",
+      },
+      secondary: {
+        main: "#051c48",
+      },
+    },
+    typography: {
+      fontFamily: "'Noto Sans KR', sans-serif",
+    },
+  });
+
+  // 재입력 useState 추가
   const [idError, setIdError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const theme = createTheme();
-
   const navigate = useNavigate();
 
-  // 이름, 전화번호, 아이디, 패스워드 받기
+  //  아이디, 패스워드 받기
   const onhandlePost = async (data) => {
     const { id, password } = data;
     const postData = { id, password };
