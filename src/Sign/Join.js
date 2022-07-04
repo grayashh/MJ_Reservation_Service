@@ -32,7 +32,16 @@ const Boxs = styled(Box)`
 `;
 
 function Join() {
-  const theme = createTheme();
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#005cb8",
+      },
+      secondary: {
+        main: "#051c48",
+      },
+    },
+  });
 
   // 유효성 검사 useState 추가
   const [checked, setChecked] = useState(false);
