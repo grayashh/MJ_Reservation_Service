@@ -147,6 +147,7 @@ function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                size="large"
               >
                 로그인
               </Button>
