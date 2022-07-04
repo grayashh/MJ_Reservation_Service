@@ -32,6 +32,7 @@ const Boxs = styled(Box)`
 `;
 
 function Join() {
+  // color, font 설정
   const theme = createTheme({
     palette: {
       primary: {
@@ -147,9 +148,11 @@ function Join() {
             alignItems: "center",
           }}
         >
+          {/* 아이콘 */}
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
+          {/* 메인 제목 */}
           <Typography component="h1" variant="h5">
             회원가입
           </Typography>
@@ -258,6 +261,7 @@ function Join() {
             </FormControl>
             <FormHelperTexts>{registerError}</FormHelperTexts>
 
+            {/* 로그인 링크 */}
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/user/login" variant="body2">
