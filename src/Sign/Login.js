@@ -52,6 +52,7 @@ function Login() {
     const { id, password } = data;
     const postData = { id, password };
 
+    // post
     await axios
       .post("/user/login", { postData })
       .then((res) => {
@@ -66,15 +67,16 @@ function Login() {
       });
   };
 
+  // form 전송
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
-    const joinData = {
+    const LoginData = {
       id: data.get("id"),
       password: data.get("password"),
     };
-    onhandlePost(joinData);
+    onhandlePost(LoginData);
   };
 
   return (
@@ -89,9 +91,12 @@ function Login() {
             alignItems: "center",
           }}
         >
+          {/* 아이콘 */}
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
+
+          {/* 메인 제목 */}
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
@@ -101,6 +106,7 @@ function Login() {
             noValidate
             sx={{ mt: 1 }}
           >
+            {/* 아이디 입력 폼 */}
             <FormControl component="fieldset" variant="standard">
               <Grid container>
                 <Grid item xs={12}>
@@ -117,6 +123,8 @@ function Login() {
                   />
                 </Grid>
                 <FormHelperTexts>{idError}</FormHelperTexts>
+
+                {/* 비밀번호 입력 폼 */}
                 <Grid item xs={12}>
                   <TextField
                     margin="normal"
@@ -132,6 +140,8 @@ function Login() {
                 </Grid>
                 <FormHelperTexts>{passwordError}</FormHelperTexts>
               </Grid>
+
+              {/* 로그인 버튼 */}
               <Button
                 type="submit"
                 fullWidth
@@ -141,6 +151,8 @@ function Login() {
                 로그인
               </Button>
             </FormControl>
+
+            {/* 비밀번호 재설정, 회원가입 페이지 링크 */}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
