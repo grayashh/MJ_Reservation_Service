@@ -3,44 +3,64 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import styled from "styled-components";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+const FormHelperTexts = styled(FormHelperText)`
+  padding-top: 5px;
+  padding-left: 240px;
+  margin-bottom: 0px;
+  font-weight: 700 !important;
+  color: #d32f2f !important;
+`;
 
-const theme = createTheme();
+function Login() {
+  const [idError, setIdError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-export default function SignIn() {
+  const theme = createTheme();
+
+  const navigate = useNavigate();
+
+  // 이름, 전화번호, 아이디, 패스워드 받기
+  const onhandlePost = async (data) => {
+    const { id, password } = data;
+    const postData = { id, password };
+
+    await axios
+      .post("/user/login", { postData })
+      .then((res) => {
+        console.log(res, "성공");
+        navigate.push("/main");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("아이디 또는 비밀번호를 다시 확인하세요.");
+        setIdError("아이디를 다시 입력해주세요.");
+        setPasswordError("비밀번호를 다시 입력해주세요.");
+      });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
+    const joinData = {
+      id: data.get("id"),
       password: data.get("password"),
-    });
+    };
+    onhandlePost(joinData);
   };
 
   return (
@@ -59,7 +79,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            로그인
           </Typography>
           <Box
             component="form"
@@ -67,54 +87,63 @@ export default function SignIn() {
             noValidate
             sx={{ mt: 1 }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
+            <FormControl component="fieldset" variant="standard">
+              <Grid container>
+                <Grid item xs={12}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="id"
+                    label="아이디"
+                    name="id"
+                    autoComplete="id"
+                    autoFocus
+                    error={idError !== "" || false}
+                  />
+                </Grid>
+                <FormHelperTexts>{idError}</FormHelperTexts>
+                <Grid item xs={12}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="비밀번호"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    error={passwordError !== "" || false}
+                  />
+                </Grid>
+                <FormHelperTexts>{passwordError}</FormHelperTexts>
+              </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                로그인
+              </Button>
+            </FormControl>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  비밀번호 재설정
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/user/join" variant="body2">
+                  아직 계정이 없으신가요? <b>계정 만들기</b>
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
 }
+
+export default Login;
