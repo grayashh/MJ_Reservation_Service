@@ -41,6 +41,9 @@ function Join() {
         main: "#051c48",
       },
     },
+    typography: {
+      fontFamily: "'Noto Sans KR', sans-serif",
+    },
   });
 
   // 유효성 검사 useState 추가
