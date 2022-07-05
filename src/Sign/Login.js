@@ -57,7 +57,7 @@ function Login() {
 
     // post
     await axios
-      .post("/user/login", { postData })
+      .post("/login", { postData })
       .then((res) => {
         console.log(res, "성공");
         navigate.push("/main");
@@ -162,7 +162,7 @@ function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/user/join" variant="body2">
+                <Link href="/join" variant="body2">
                   아직 계정이 없으신가요? <b>계정 만들기</b>
                 </Link>
               </Grid>
