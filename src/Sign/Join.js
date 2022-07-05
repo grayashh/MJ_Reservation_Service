@@ -68,7 +68,7 @@ function Join() {
     const postData = { name, phone, id, password };
 
     await axios
-      .post("/user/join", { postData })
+      .post("/join", { postData })
       .then((res) => {
         console.log(res, "성공");
         navigate.push("/user/login");
