@@ -24,7 +24,7 @@ function NotFound() {
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
-            marginTop: 40,
+            marginTop: 30,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
