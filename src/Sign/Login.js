@@ -18,11 +18,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const FormHelperTexts = styled(FormHelperText)`
-  padding-top: 5px;
-  padding-left: 240px;
-  margin-bottom: 0px;
+  width: 100%;
+  padding-left: 16px;
   font-weight: 700 !important;
   color: #d32f2f !important;
+`;
+
+const Boxs = styled(Box)`
+  padding-bottom: 40px !important;
 `;
 
 function Login() {
@@ -100,18 +103,17 @@ function Login() {
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
-          <Box
+          <Boxs
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ mt: 3 }}
           >
-            {/* 아이디 입력 폼 */}
             <FormControl component="fieldset" variant="standard">
-              <Grid container>
+              {/* 아이디 입력 폼 */}
+              <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
-                    margin="normal"
                     required
                     fullWidth
                     id="id"
@@ -127,7 +129,6 @@ function Login() {
                 {/* 비밀번호 입력 폼 */}
                 <Grid item xs={12}>
                   <TextField
-                    margin="normal"
                     required
                     fullWidth
                     name="password"
@@ -166,7 +167,7 @@ function Login() {
                 </Link>
               </Grid>
             </Grid>
-          </Box>
+          </Boxs>
         </Box>
       </Container>
     </ThemeProvider>
