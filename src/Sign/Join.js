@@ -71,7 +71,7 @@ function Join() {
       .post("/join", { postData })
       .then((res) => {
         console.log(res, "성공");
-        navigate.push("/user/login");
+        navigate.push("/");
       })
       .catch((err) => {
         console.log(err);
@@ -264,7 +264,7 @@ function Join() {
             {/* 로그인 링크 */}
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/user/login" variant="body2">
+                <Link href="/login" variant="body2">
                   이미 계정이 있으신가요? <b>로그인 하기</b>
                 </Link>
               </Grid>
