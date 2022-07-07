@@ -1,7 +1,7 @@
 import "./App.css";
-import Join from ".Page/Sign/Join";
-import Login from ".Page/Sign/Login";
-import NotFound from ".Page/Error/NotFound";
+import Join from "./Page/Sign/Join";
+import Login from "./Page/Sign/Login";
+import NotFound from "./Page/Error/NotFound";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
