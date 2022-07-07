@@ -41,7 +41,7 @@ function NotFound() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             size="large"
-            href="/main"
+            href="/"
           >
             홈으로 돌아가기
           </Button>
