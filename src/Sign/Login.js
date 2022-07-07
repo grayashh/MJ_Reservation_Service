@@ -60,7 +60,7 @@ function Login() {
       .post("/login", { postData })
       .then((res) => {
         console.log(res, "성공");
-        navigate.push("/main");
+        navigate.push("/");
       })
       .catch((err) => {
         console.log(err);
@@ -157,7 +157,7 @@ function Login() {
             {/* 비밀번호 재설정, 회원가입 페이지 링크 */}
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="reset-pw" variant="body2">
                   비밀번호 재설정
                 </Link>
               </Grid>
