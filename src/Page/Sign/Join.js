@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import styled from "styled-components";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
+import Swal from "sweetalert2";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -70,11 +71,22 @@ function Join() {
     await axios
       .post("/join", { postData })
       .then((res) => {
-        console.log(res, "성공");
+        Swal.fire({
+          icon: "success",
+          title: "회원가입 성공",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate.push("/");
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          iconColor: "#d32f2f",
+          title: "회원가입 실패",
+          text: "다시 시도해주세요",
+          confirmButtonColor: "#005cb8",
+        });
         setRegisterError("회원가입에 실패하였습니다.");
       });
   };
@@ -112,7 +124,7 @@ function Join() {
     // 비밀번호 유효성 체크
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
     if (!passwordRegex.test(password))
-      setPasswordState("영문자+숫자 조합으로 8자리 이상 입력해주세요!");
+      setPasswordState("영문자+숫자 조합으로 8자리 이상 입력해주세요.");
     else setPasswordState("");
 
     // 비밀번호 같은지 체크
@@ -121,7 +133,14 @@ function Join() {
     else setPasswordError("");
 
     // 회원가입 동의 체크
-    if (!checked) alert("회원가입 약관에 동의해주세요.");
+    if (!checked)
+      Swal.fire({
+        icon: "error",
+        iconColor: "#d32f2f",
+        title: "회원가입 실패",
+        text: "회원가입 약관에 동의해주세요.",
+        confirmButtonColor: "#005cb8",
+      });
 
     // 모두 통과하면 post되는 코드 실행
     if (
