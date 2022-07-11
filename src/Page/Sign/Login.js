@@ -92,14 +92,7 @@ function Login() {
       id: data.get("id"),
       password: data.get("password"),
     };
-    // submit 버튼 중복클릭 방지
-    let submitBtn = document.getElementById("submit");
-    submitBtn.addEventListener("click", function (e) {
-      this.setAttribute("disabled", "true");
-      this.setAttribute("disabledElevation", "true");
-      this.setAttribute("disabledRipple", "true");
-      onhandlePost(LoginData);
-    });
+    onhandlePost(LoginData);
   };
 
   return (
