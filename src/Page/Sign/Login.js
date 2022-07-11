@@ -60,15 +60,17 @@ function Login() {
     await axios
       .post("/login", { postData })
       .then((res) => {
+        console.log(res, "성공");
         Swal.fire({
           icon: "success",
           title: "로그인 성공",
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate.push("/");
+        navigate("/");
       })
       .catch((err) => {
+        console.log(err);
         Swal.fire({
           icon: "error",
           iconColor: "#d32f2f",
@@ -90,7 +92,14 @@ function Login() {
       id: data.get("id"),
       password: data.get("password"),
     };
-    onhandlePost(LoginData);
+    // submit 버튼 중복클릭 방지
+    let submitBtn = document.getElementById("submit");
+    submitBtn.addEventListener("click", function (e) {
+      this.setAttribute("disabled", "true");
+      this.setAttribute("disabledElevation", "true");
+      this.setAttribute("disabledRipple", "true");
+      onhandlePost(LoginData);
+    });
   };
 
   return (

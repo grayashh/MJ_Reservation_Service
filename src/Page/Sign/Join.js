@@ -77,7 +77,7 @@ function Join() {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate.push("/");
+        navigate("/");
       })
       .catch((err) => {
         Swal.fire({
@@ -151,7 +151,14 @@ function Join() {
       password === rePassword &&
       checked
     ) {
-      onhandlePost(joinData);
+      // submit 버튼 중복클릭 방지
+      let submitBtn = document.getElementById("submit");
+      submitBtn.addEventListener("click", function (e) {
+        this.setAttribute("disabled", "true");
+        this.setAttribute("disabledElevation", "true");
+        this.setAttribute("disabledRipple", "true");
+        onhandlePost(joinData);
+      });
     }
   };
 
@@ -269,6 +276,7 @@ function Join() {
 
               {/* 회원가입 버튼 */}
               <Button
+                id="submit"
                 type="submit"
                 fullWidth
                 variant="contained"
