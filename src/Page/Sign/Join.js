@@ -55,7 +55,6 @@ function Join() {
   const [idError, setIdError] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [registerError, setRegisterError] = useState("");
   const navigate = useNavigate();
 
   // 약관 동의 체크 확인
@@ -71,6 +70,13 @@ function Join() {
     await axios
       .post("/join", { postData })
       .then((res) => {
+        // submit 버튼 중복클릭 방지
+        let submitBtn = document.getElementById("submit");
+        submitBtn.addEventListener("click", function (e) {
+          this.setAttribute("disabled", "true");
+          this.setAttribute("disabledElevation", "true");
+          this.setAttribute("disabledRipple", "true");
+        });
         Swal.fire({
           icon: "success",
           title: "회원가입 성공",
@@ -87,7 +93,6 @@ function Join() {
           text: "다시 시도해주세요",
           confirmButtonColor: "#005cb8",
         });
-        setRegisterError("회원가입에 실패하였습니다.");
       });
   };
 
@@ -151,14 +156,7 @@ function Join() {
       password === rePassword &&
       checked
     ) {
-      // submit 버튼 중복클릭 방지
-      let submitBtn = document.getElementById("submit");
-      submitBtn.addEventListener("click", function (e) {
-        this.setAttribute("disabled", "true");
-        this.setAttribute("disabledElevation", "true");
-        this.setAttribute("disabledRipple", "true");
-        onhandlePost(joinData);
-      });
+      onhandlePost(joinData);
     }
   };
 
@@ -286,7 +284,6 @@ function Join() {
                 회원가입
               </Button>
             </FormControl>
-            <FormHelperTexts>{registerError}</FormHelperTexts>
 
             {/* 로그인 링크 */}
             <Grid container justifyContent="flex-end">
