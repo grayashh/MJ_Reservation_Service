@@ -60,15 +60,17 @@ function Login() {
     await axios
       .post("/login", { postData })
       .then((res) => {
+        console.log(res, "성공");
         Swal.fire({
           icon: "success",
           title: "로그인 성공",
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate.push("/");
+        navigate("/");
       })
       .catch((err) => {
+        console.log(err);
         Swal.fire({
           icon: "error",
           iconColor: "#d32f2f",
