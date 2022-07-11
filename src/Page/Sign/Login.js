@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import styled from "styled-components";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
+import Swal from "sweetalert2";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -59,12 +60,22 @@ function Login() {
     await axios
       .post("/login", { postData })
       .then((res) => {
-        console.log(res, "성공");
+        Swal.fire({
+          icon: "success",
+          title: "로그인 성공",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate.push("/");
       })
       .catch((err) => {
-        console.log(err);
-        alert("아이디 또는 비밀번호를 다시 확인하세요.");
+        Swal.fire({
+          icon: "error",
+          iconColor: "#d32f2f",
+          title: "로그인 실패",
+          text: "아이디 또는 비밀번호를 다시 확인해주세요",
+          confirmButtonColor: "#005cb8",
+        });
         setIdError("아이디를 다시 입력해주세요.");
         setPasswordError("비밀번호를 다시 입력해주세요.");
       });
