@@ -1,7 +1,8 @@
 import "./App.css";
-import Join from "./Page/Sign/Join";
-import Login from "./Page/Sign/Login";
-import NotFound from "./Page/Error/NotFound";
+import Main from "./pages/main/Main";
+import Join from "./pages/sign/Join";
+import Login from "./pages/sign/Login";
+import NotFound from "./pages/error/NotFound";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/" element={<Main />} />
           <Route path="/join" element={<Join />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
