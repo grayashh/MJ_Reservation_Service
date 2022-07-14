@@ -12,11 +12,19 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "./img/Logo.gif";
+import Link from "@mui/material/Link";
 
-const pages = ["내 예약 확인", "문의사항"];
-const settings = ["내 계정", "로그아웃"];
+const pages = [
+  { label: "내 예약 확인", value: "/check" },
+  { label: "문의사항", value: "/contact" },
+];
 
-const ResponsiveAppBar = () => {
+const settings = [
+  { label: "내 계정", value: "/my" },
+  { label: "로그아웃", value: "/login" },
+];
+
+const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -78,8 +86,10 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                  <Link href={page.value} color="inherit" underline="none">
+                    <Typography textAlign="center">{page.label}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -111,11 +121,13 @@ const ResponsiveAppBar = () => {
 
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.label}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                <Link href={page.value} color="inherit" underline="none">
+                  {page.label}
+                </Link>
               </Button>
             ))}
           </Box>
@@ -130,7 +142,7 @@ const ResponsiveAppBar = () => {
 
             {/* 프로필 메뉴 */}
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: "40px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -146,8 +158,12 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    <Link href={setting.value} color="inherit" underline="none">
+                      {setting.label}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -157,4 +173,4 @@ const ResponsiveAppBar = () => {
     </AppBar>
   );
 };
-export default ResponsiveAppBar;
+export default Header;
