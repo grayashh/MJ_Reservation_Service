@@ -7,14 +7,14 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "./img/Logo.gif";
 
-const pages = ["예약하기", "문의사항"];
-const settings = ["프로필", "내 계정", "내 예약보기", "로그아웃"];
+const pages = ["내 예약 확인", "문의사항"];
+const settings = ["내 계정", "로그아웃"];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,26 +36,26 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Button href="/">
-            <Box
-              component="img"
-              sx={{
-                height: "64px",
-              }}
-              src={Logo}
-            />
-          </Button>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+    <AppBar position="static" color="header">
+      <Container maxWidth="x">
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          {/* 메뉴 버튼 for mobile */}
+          <Box
+            sx={{
+              display: {
+                xs: "flex",
+                md: "none",
+                justifyContent: "flex-start",
+              },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="icon"
             >
               <MenuIcon />
             </IconButton>
@@ -84,25 +84,31 @@ const ResponsiveAppBar = () => {
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
+
+          {/* 로고 */}
+          <Button href="/">
+            <Box
+              component="img"
+              sx={{
+                width: 50,
+              }}
+              src={Logo}
+            />
+          </Button>
+
+          {/* 메뉴 버튼 for desktop */}
+          <Box
             sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
+              display: {
+                xs: "none",
+                md: "flex",
+                justifyContent: "flex-end",
+              },
             }}
           >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {/* 로고 */}
+
             {pages.map((page) => (
               <Button
                 key={page}
@@ -114,12 +120,15 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          {/* 프로필 아이콘 */}
+          <Box>
+            <Tooltip>
+              <IconButton onClick={handleOpenUserMenu}>
+                <AccountCircle fontSize="large" color="icon" />
               </IconButton>
             </Tooltip>
+
+            {/* 프로필 메뉴 */}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
