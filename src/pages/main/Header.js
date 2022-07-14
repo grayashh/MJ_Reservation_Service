@@ -123,7 +123,7 @@ const Header = () => {
               <Button
                 key={page.label}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, mr: 1, color: "white", display: "block" }}
               >
                 <Link href={page.value} color="inherit" underline="none">
                   {page.label}
