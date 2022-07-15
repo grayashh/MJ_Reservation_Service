@@ -1,6 +1,8 @@
 import Header from "./Header";
+import Article from "./Article";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import { Grid } from "@mui/material";
+import { Box } from "@mui/system";
 function Main() {
   const theme = createTheme({
     palette: {
@@ -25,6 +27,11 @@ function Main() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
+      <Box sx={{ m: 20 }}>
+        <Grid>
+          <Article />
+        </Grid>
+      </Box>
     </ThemeProvider>
   );
 }
