@@ -24,6 +24,7 @@ const settings = [
 ];
 
 const Header = () => {
+  //  Menu Opne, close state
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -95,7 +96,7 @@ const Header = () => {
           </Box>
 
           {/* 로고 */}
-          <Button href="/">
+          <IconButton href="/">
             <Box
               component="img"
               sx={{
@@ -103,7 +104,7 @@ const Header = () => {
               }}
               src="/images/Logo.gif"
             />
-          </Button>
+          </IconButton>
 
           {/* 메뉴 버튼 for desktop */}
           <Box
@@ -116,8 +117,6 @@ const Header = () => {
               },
             }}
           >
-            {/* 로고 */}
-
             {pages.map((page) => (
               <Button
                 key={page.label}
