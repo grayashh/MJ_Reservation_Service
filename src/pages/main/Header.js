@@ -11,7 +11,6 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import Logo from "./img/Logo.gif";
 import Link from "@mui/material/Link";
 
 const pages = [
@@ -102,7 +101,7 @@ const Header = () => {
               sx={{
                 width: 50,
               }}
-              src={Logo}
+              src="/images/Logo.gif"
             />
           </Button>
 
@@ -123,7 +122,7 @@ const Header = () => {
               <Button
                 key={page.label}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, mr: 1, color: "white", display: "block" }}
               >
                 <Link href={page.value} color="inherit" underline="none">
                   {page.label}
