@@ -1,8 +1,9 @@
 import Header from "./Header";
-import Article from "./Article";
+import Court1 from "./Court1";
+import Court2 from "./Court2";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Grid } from "@mui/material";
-import { Box } from "@mui/system";
+import { Container, Grid } from "@mui/material";
+
 function Main() {
   const theme = createTheme({
     palette: {
@@ -27,11 +28,16 @@ function Main() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Box sx={{ m: 20 }}>
-        <Grid>
-          <Article />
+      <Container sx={{ mt: 10 }}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={6}>
+            <Court1 />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Court2 />
+          </Grid>
         </Grid>
-      </Box>
+      </Container>
     </ThemeProvider>
   );
 }

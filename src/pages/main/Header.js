@@ -96,7 +96,7 @@ const Header = () => {
           </Box>
 
           {/* 로고 */}
-          <Button href="/">
+          <IconButton href="/">
             <Box
               component="img"
               sx={{
@@ -104,7 +104,7 @@ const Header = () => {
               }}
               src="/images/Logo.gif"
             />
-          </Button>
+          </IconButton>
 
           {/* 메뉴 버튼 for desktop */}
           <Box
