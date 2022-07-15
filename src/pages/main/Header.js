@@ -24,6 +24,7 @@ const settings = [
 ];
 
 const Header = () => {
+  //  Menu Opne, close state
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -116,8 +117,6 @@ const Header = () => {
               },
             }}
           >
-            {/* 로고 */}
-
             {pages.map((page) => (
               <Button
                 key={page.label}
