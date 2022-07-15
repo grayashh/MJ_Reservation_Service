@@ -3,6 +3,7 @@ import Court1 from "./Court1";
 import Court2 from "./Court2";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container, Grid } from "@mui/material";
+import Footer from "./Footer";
 
 function Main() {
   const theme = createTheme({
@@ -38,6 +39,7 @@ function Main() {
           </Grid>
         </Grid>
       </Container>
+      <Footer />
     </ThemeProvider>
   );
 }
