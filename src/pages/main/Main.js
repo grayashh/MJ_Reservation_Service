@@ -29,12 +29,25 @@ function Main() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Container sx={{ mt: 10 }}>
-        <Grid container spacing={1}>
-          <Grid item xs={12} sm={6}>
+      <Container
+        maxWidth="lg"
+        fixed="true"
+        disableGutters
+        align="center"
+        sx={{ mt: 2 }}
+      >
+        <Grid
+          container
+          spacing={4}
+          alignContent="center"
+          style={{
+            height: "100vh",
+          }}
+        >
+          <Grid item sm={6} xs={12}>
             <Court1 />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item sm={6} xs={12}>
             <Court2 />
           </Grid>
         </Grid>
