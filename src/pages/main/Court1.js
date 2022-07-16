@@ -10,7 +10,11 @@ export default function ActionAreaCard() {
   return (
     <Card sx={{ maxWidth: 400 }}>
       <CardActionArea>
-        <CardMedia component="img" height="550" image="/images/court.png" />
+        <CardMedia
+          component="img"
+          sx={{ maxHeight: { xs: 300, md: 550 } }}
+          image="/images/court.png"
+        />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             농구장1

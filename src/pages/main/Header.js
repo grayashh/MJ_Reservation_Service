@@ -44,7 +44,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" color="header">
+    <AppBar color="header">
       <Container maxWidth="x">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           {/* 메뉴 버튼 for mobile */}
