@@ -43,7 +43,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar color="header">
+    <AppBar color="header" elevation="false">
       <Container maxWidth="x">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           {/* 메뉴 버튼 for mobile */}
@@ -51,7 +51,7 @@ const Header = () => {
             sx={{
               display: {
                 xs: "flex",
-                md: "none",
+                sm: "none",
                 justifyContent: "flex-start",
               },
             }}
@@ -81,7 +81,7 @@ const Header = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: "block", sm: "none" },
               }}
             >
               {pages.map((page) => (
@@ -117,7 +117,7 @@ const Header = () => {
               flexGrow: 1,
               display: {
                 xs: "none",
-                md: "flex",
+                sm: "flex",
                 justifyContent: "flex-end",
               },
             }}
@@ -129,7 +129,7 @@ const Header = () => {
                 sx={{ my: 2, mr: 1, color: "white", display: "block" }}
                 href={page.value}
               >
-                {page.label}
+                <Typography variant="h7">{page.label}</Typography>
               </Button>
             ))}
           </Box>
