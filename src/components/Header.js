@@ -93,7 +93,7 @@ const Header = () => {
                     color: "inherit",
                   }}
                 >
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.label}</Typography>
                   </MenuItem>
                 </a>
@@ -169,7 +169,7 @@ const Header = () => {
                     color: "inherit",
                   }}
                 >
-                  <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
+                  <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting.label}</Typography>
                   </MenuItem>
                 </a>
