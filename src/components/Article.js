@@ -7,13 +7,15 @@ import Typography from "@mui/material/Typography";
 const images = [
   {
     url: "/images/court.jpg",
-    title: "Left Court",
+    title: "Basketball Court",
     width: "35%",
+    redirect: "/reservation/court",
   },
   {
-    url: "/images/court.jpg",
-    title: "Right Court",
+    url: "/images/field.jpg",
+    title: "Soccer Field",
     width: "35%",
+    redirect: "/reservation/field",
   },
 ];
 
@@ -85,9 +87,9 @@ export default function Article() {
   return (
     <Box
       sx={{
-        display: "flex",
+        display: { sm: "flex" },
         justifyContent: "space-around",
-        minWidth: 300,
+        minWidth: 400,
         width: "100%",
       }}
     >
@@ -96,6 +98,7 @@ export default function Article() {
           sx={{ boxShadow: 10 }}
           focusRipple
           key={image.title}
+          href={image.redirect}
           style={{
             width: image.width,
           }}

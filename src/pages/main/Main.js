@@ -1,8 +1,8 @@
-import Header from "./Header";
+import Header from "../../components/Header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container, Grid } from "@mui/material";
-import BackgroundVideo from "./Background";
-import Article from "./Article";
+import BackgroundVideo from "../../components/Background";
+import Article from "../../components/Article";
 
 function Main() {
   const theme = createTheme({
@@ -28,13 +28,7 @@ function Main() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Container
-        // 부드러움의 차이
-        // fixed="true"
-        disableGutters
-        align="center"
-        sx={{ mt: 4 }}
-      >
+      <Container disableGutters align="center" sx={{ mt: 4 }}>
         <Grid
           container
           spacing={4}
@@ -43,16 +37,9 @@ function Main() {
             height: "100vh",
           }}
         >
-          {/* <Grid item sm={6} xs={6}>
-            <Court1 />
-          </Grid>
-          <Grid item sm={6} xs={6}>
-            <Court2 />
-          </Grid> */}
           <Article />
         </Grid>
       </Container>
-      {/* <Footer /> */}
       <BackgroundVideo />
     </ThemeProvider>
   );
