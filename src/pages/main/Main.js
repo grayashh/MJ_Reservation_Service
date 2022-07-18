@@ -1,10 +1,8 @@
 import Header from "./Header";
-import Court1 from "./Court1";
-import Court2 from "./Court2";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container, Grid } from "@mui/material";
-import Footer from "./Footer";
 import BackgroundVideo from "./Background";
+import Article from "./Article";
 
 function Main() {
   const theme = createTheme({
@@ -16,7 +14,7 @@ function Main() {
         main: "#051c48",
       },
       header: {
-        main: "#808080",
+        main: "transparent",
       },
       icon: {
         main: "#FFFFFF",
@@ -35,7 +33,7 @@ function Main() {
         // fixed="true"
         disableGutters
         align="center"
-        sx={{ mt: 2 }}
+        sx={{ mt: 4 }}
       >
         <Grid
           container
@@ -45,15 +43,16 @@ function Main() {
             height: "100vh",
           }}
         >
-          <Grid item sm={6} xs={6}>
+          {/* <Grid item sm={6} xs={6}>
             <Court1 />
           </Grid>
           <Grid item sm={6} xs={6}>
             <Court2 />
-          </Grid>
+          </Grid> */}
+          <Article />
         </Grid>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
       <BackgroundVideo />
     </ThemeProvider>
   );

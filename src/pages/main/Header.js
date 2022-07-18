@@ -11,7 +11,6 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import Link from "@mui/material/Link";
 
 const pages = [
   { label: "내 예약 확인", value: "/check" },
@@ -44,7 +43,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar color="header">
+    <AppBar color="header" elevation="false">
       <Container maxWidth="x">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           {/* 메뉴 버튼 for mobile */}
@@ -52,7 +51,7 @@ const Header = () => {
             sx={{
               display: {
                 xs: "flex",
-                md: "none",
+                sm: "none",
                 justifyContent: "flex-start",
               },
             }}
@@ -82,15 +81,21 @@ const Header = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: "block", sm: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                  <Link href={page.value} color="inherit" underline="none">
+                <a
+                  href={page.value}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                >
+                  <MenuItem key={page.label} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.label}</Typography>
-                  </Link>
-                </MenuItem>
+                  </MenuItem>
+                </a>
               ))}
             </Menu>
           </Box>
@@ -112,7 +117,7 @@ const Header = () => {
               flexGrow: 1,
               display: {
                 xs: "none",
-                md: "flex",
+                sm: "flex",
                 justifyContent: "flex-end",
               },
             }}
@@ -122,10 +127,9 @@ const Header = () => {
                 key={page.label}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, mr: 1, color: "white", display: "block" }}
+                href={page.value}
               >
-                <Link href={page.value} color="inherit" underline="none">
-                  {page.label}
-                </Link>
+                <Typography variant="h7">{page.label}</Typography>
               </Button>
             ))}
           </Box>
@@ -156,13 +160,17 @@ const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    <Link href={setting.value} color="inherit" underline="none">
-                      {setting.label}
-                    </Link>
-                  </Typography>
-                </MenuItem>
+                <a
+                  href={setting.value}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                >
+                  <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting.label}</Typography>
+                  </MenuItem>
+                </a>
               ))}
             </Menu>
           </Box>
