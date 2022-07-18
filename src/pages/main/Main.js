@@ -1,8 +1,8 @@
-import Header from "./Header";
+import Header from "../../components/Header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container, Grid } from "@mui/material";
-import BackgroundVideo from "./Background";
-import Article from "./Article";
+import BackgroundVideo from "../../components/Background";
+import Article from "../../components/Article";
 
 function Main() {
   const theme = createTheme({

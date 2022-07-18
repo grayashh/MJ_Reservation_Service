@@ -86,13 +86,14 @@ const Header = () => {
             >
               {pages.map((page) => (
                 <a
+                  key={page}
                   href={page.value}
                   style={{
                     textDecoration: "none",
                     color: "inherit",
                   }}
                 >
-                  <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.label}</Typography>
                   </MenuItem>
                 </a>
@@ -124,7 +125,7 @@ const Header = () => {
           >
             {pages.map((page) => (
               <Button
-                key={page.label}
+                key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, mr: 1, color: "white", display: "block" }}
                 href={page.value}
@@ -161,6 +162,7 @@ const Header = () => {
             >
               {settings.map((setting) => (
                 <a
+                  key={setting}
                   href={setting.value}
                   style={{
                     textDecoration: "none",
