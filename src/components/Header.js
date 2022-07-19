@@ -7,9 +7,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
 const pages = [
@@ -17,29 +15,16 @@ const pages = [
   { label: "문의사항", value: "/contact" },
 ];
 
-const settings = [
-  { label: "내 계정", value: "/my" },
-  { label: "로그아웃", value: "/login" },
-];
-
 const Header = () => {
   //  Menu Opne, close state
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -86,7 +71,7 @@ const Header = () => {
             >
               {pages.map((page) => (
                 <a
-                  key={page}
+                  key={page.label}
                   href={page.value}
                   style={{
                     textDecoration: "none",
@@ -125,7 +110,7 @@ const Header = () => {
           >
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.label}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, mr: 1, color: "white", display: "block" }}
                 href={page.value}
@@ -133,48 +118,6 @@ const Header = () => {
                 <Typography variant="h7">{page.label}</Typography>
               </Button>
             ))}
-          </Box>
-
-          {/* 프로필 아이콘 */}
-          <Box>
-            <Tooltip>
-              <IconButton onClick={handleOpenUserMenu}>
-                <AccountCircle fontSize="large" color="icon" />
-              </IconButton>
-            </Tooltip>
-
-            {/* 프로필 메뉴 */}
-            <Menu
-              sx={{ mt: "40px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <a
-                  key={setting}
-                  href={setting.value}
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                  }}
-                >
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting.label}</Typography>
-                  </MenuItem>
-                </a>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>
