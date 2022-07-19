@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Card, CardContent } from "@mui/material";
 import Header from "../../components/Header";
+import BackgroundVideo from "../../components/Background";
 
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
@@ -35,7 +36,7 @@ function Join() {
         main: "#051c48",
       },
       header: {
-        main: "#808080",
+        main: "transparent",
       },
       icon: {
         main: "#FFFFFF",
@@ -130,7 +131,7 @@ function Join() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Container sx={{ mt: 18 }} maxWidth="sm">
+      <Container sx={{ mt: 10 }} maxWidth="sm">
         <Card>
           <CardContent>
             <Box sx={{ textAlign: "center" }}>
@@ -220,6 +221,7 @@ function Join() {
           </CardContent>
         </Card>
       </Container>
+      <BackgroundVideo />
     </ThemeProvider>
   );
 }
