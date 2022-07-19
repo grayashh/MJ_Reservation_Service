@@ -89,7 +89,6 @@ export default function Article() {
       sx={{
         display: { sm: "flex" },
         justifyContent: "space-around",
-        minWidth: 400,
         width: "100%",
       }}
     >

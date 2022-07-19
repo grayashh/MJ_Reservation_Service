@@ -10,11 +10,6 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
-const pages = [
-  { label: "내 예약 확인", value: "/check" },
-  { label: "문의사항", value: "/contact" },
-];
-
 const Header = () => {
   //  Menu Opne, close state
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -28,16 +23,27 @@ const Header = () => {
   };
 
   return (
-    <AppBar color="header" elevation="false">
+    <AppBar color="header" position="relative" elevation={0}>
       <Container maxWidth="x">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          {/* 로고 */}
+          <IconButton href="/">
+            <Box
+              component="img"
+              sx={{
+                width: 50,
+              }}
+              src="/images/Logo.gif"
+            />
+          </IconButton>
+
           {/* 메뉴 버튼 for mobile */}
           <Box
             sx={{
               display: {
                 xs: "flex",
                 sm: "none",
-                justifyContent: "flex-start",
+                justifyContent: "flex-end",
               },
             }}
           >
@@ -69,33 +75,30 @@ const Header = () => {
                 display: { xs: "block", sm: "none" },
               }}
             >
-              {pages.map((page) => (
-                <a
-                  key={page.label}
-                  href={page.value}
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                  }}
-                >
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page.label}</Typography>
-                  </MenuItem>
-                </a>
-              ))}
+              <a
+                href="/check"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">내 예약 확인</Typography>
+                </MenuItem>
+              </a>
+              <a
+                href="/contact"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">문의사항</Typography>
+                </MenuItem>
+              </a>
             </Menu>
           </Box>
-
-          {/* 로고 */}
-          <IconButton href="/">
-            <Box
-              component="img"
-              sx={{
-                width: 50,
-              }}
-              src="/images/Logo.gif"
-            />
-          </IconButton>
 
           {/* 메뉴 버튼 for desktop */}
           <Box
@@ -108,16 +111,20 @@ const Header = () => {
               },
             }}
           >
-            {pages.map((page) => (
-              <Button
-                key={page.label}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, mr: 1, color: "white", display: "block" }}
-                href={page.value}
-              >
-                <Typography variant="h7">{page.label}</Typography>
-              </Button>
-            ))}
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, mr: 1, color: "white", display: "block" }}
+              href="/check"
+            >
+              <Typography variant="h7">내 예약 확인</Typography>
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, mr: 1, color: "white", display: "block" }}
+              href="/contact"
+            >
+              <Typography variant="h7">문의사항</Typography>
+            </Button>
           </Box>
         </Toolbar>
       </Container>

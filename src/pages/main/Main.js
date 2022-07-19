@@ -28,12 +28,12 @@ function Main() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Container disableGutters align="center" sx={{ mt: 4 }}>
+      <Container disableGutters align="center">
         <Grid
           container
-          spacing={4}
+          spacing={2}
           alignContent="center"
-          style={{
+          sx={{
             height: "100vh",
           }}
         >
