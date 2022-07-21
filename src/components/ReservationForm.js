@@ -2,109 +2,182 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import FormHelperText from "@mui/material/FormHelperText";
+import { useState } from "react";
+import styled from "styled-components";
 
-export default function AddressForm() {
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { Box } from "@mui/material";
+
+const FormHelperTexts = styled(FormHelperText)`
+  width: 100%;
+  padding-left: 16px;
+  font-weight: 700 !important;
+  color: #d32f2f !important;
+`;
+
+export default function AddressForm(props) {
+  const [onhandlePost, setOnHandlePost] = useState(false);
+
+  const [startValue, setStartValue] = React.useState(new Date());
+  const [endValue, setEndValue] = React.useState(new Date());
+
+  const [nameError, setNameError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [passwordState, setPasswordState] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  //form 전송
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+    const joinData = {
+      name: data.get("name"),
+      phone: data.get("phone"),
+      id: data.get("id"),
+      password: data.get("password"),
+      rePassword: data.get("rePassword"),
+    };
+    const { name, phone, id, password, rePassword } = joinData;
+    // 이름 유효성 체크
+    const nameRegex = /^[가-힣a-zA-Z]+$/;
+    if (!nameRegex.test(name) || name.length < 1)
+      setNameError("올바른 이름을 입력해주세요.");
+    else setNameError("");
+
+    // 전화번호 유효성 체크
+    const phoneRegex = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
+    if (!phoneRegex.test(phone))
+      setPhoneError("올바른 전화번호를 입력해주세요.");
+    else setPhoneError("");
+
+    // 비밀번호 유효성 체크
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+    if (!passwordRegex.test(password))
+      setPasswordState("영문자+숫자 조합으로 8자리 이상 입력해주세요.");
+    else setPasswordState("");
+
+    // 비밀번호 같은지 체크
+    if (password !== rePassword)
+      setPasswordError("비밀번호가 일치하지 않습니다.");
+    else setPasswordError("");
+
+    // 모두 통과하면 post되는 코드 실행
+    if (
+      nameRegex.test(name) &&
+      phoneRegex.test(phone) &&
+      passwordRegex.test(password) &&
+      password === rePassword
+    ) {
+      setOnHandlePost();
+    }
+  };
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Shipping address
+        예약 정보
       </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={12} sx={{ mt: 3 }}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Box
+              container
+              sx={{
+                display: {
+                  xs: "flex",
+                  justifyContent: "space-evenly",
+                },
+              }}
+            >
+              <Box>
+                <DateTimePicker
+                  renderInput={(params) => <TextField {...params} />}
+                  label="예약 시작 시간"
+                  value={startValue}
+                  onChange={(newValue) => {
+                    setStartValue(newValue);
+                  }}
+                  minDateTime={new Date()}
+                  minutesStep="15"
+                />
+              </Box>
+              <Box>
+                <DateTimePicker
+                  renderInput={(params) => <TextField {...params} />}
+                  label="예약 종료 시간"
+                  value={endValue}
+                  onChange={(newValue) => {
+                    setEndValue(newValue);
+                  }}
+                  minDateTime={new Date(startValue)}
+                  minutesStep="15"
+                />
+              </Box>
+            </Box>
+          </LocalizationProvider>
+        </Grid>
+        <Grid item xs={12} sm={12}>
           <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
             autoComplete="given-name"
             variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
+            name="name"
             required
-            id="lastName"
-            name="lastName"
-            label="Last name"
             fullWidth
-            autoComplete="family-name"
-            variant="standard"
+            id="name"
+            label="이름"
+            autoFocus
+            error={nameError !== "" || false}
           />
         </Grid>
+        <FormHelperTexts>{nameError}</FormHelperTexts>
         <Grid item xs={12}>
           <TextField
             required
-            id="address1"
-            name="address1"
-            label="Address line 1"
             fullWidth
-            autoComplete="shipping address-line1"
             variant="standard"
+            id="phone"
+            label="전화번호(010-XXXX-XXXX)"
+            name="phone"
+            autoComplete="phone"
+            error={phoneError !== "" || false}
           />
         </Grid>
+        <FormHelperTexts>{phoneError}</FormHelperTexts>
+        {/* 비밀번호 입력 폼 */}
         <Grid item xs={12}>
           <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
-            fullWidth
-            autoComplete="shipping address-line2"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
             required
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="shipping address-level2"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
             fullWidth
             variant="standard"
+            name="password"
+            label="예약 확인용 비밀번호 (영문자+숫자 8자리 이상)"
+            type="password"
+            id="password"
+            autoComplete="new-password"
+            error={passwordState !== "" || false}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="shipping postal-code"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="shipping country"
-            variant="standard"
-          />
-        </Grid>
+        <FormHelperTexts>{passwordState}</FormHelperTexts>
+
+        {/* 비밀번호 재입력 폼 */}
         <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox color="secondary" name="saveAddress" value="yes" />
-            }
-            label="Use this address for payment details"
+          <TextField
+            required
+            fullWidth
+            variant="standard"
+            name="rePassword"
+            label="비밀번호 재입력"
+            type="password"
+            id="rePassword"
+            autoComplete="new-password"
+            error={passwordError !== "" || false}
           />
         </Grid>
+        <FormHelperTexts>{passwordError}</FormHelperTexts>
       </Grid>
     </React.Fragment>
   );
