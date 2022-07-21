@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container, Grid } from "@mui/material";
 import BackgroundVideo from "../../components/Background";
 import Article from "../../components/Article";
+import FadeIn from "react-fade-in/lib/FadeIn";
 
 function Main() {
   const theme = createTheme({
@@ -28,18 +29,20 @@ function Main() {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Container disableGutters align="center">
-        <Grid
-          container
-          spacing={2}
-          alignContent="center"
-          sx={{
-            height: "100vh",
-          }}
-        >
-          <Article />
-        </Grid>
-      </Container>
+      <FadeIn>
+        <Container disableGutters align="center">
+          <Grid
+            container
+            spacing={2}
+            alignContent="center"
+            sx={{
+              height: "100vh",
+            }}
+          >
+            <Article />
+          </Grid>
+        </Container>
+      </FadeIn>
       <BackgroundVideo />
     </ThemeProvider>
   );
