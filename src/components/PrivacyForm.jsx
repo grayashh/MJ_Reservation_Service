@@ -45,7 +45,7 @@ export default function PaymentForm(props) {
               border: "1px solid grey",
             }}
           >
-            <div dangerouslySetInnerHTML={{ __html: privacyText }}></div>;
+            <div dangerouslySetInnerHTML={{ __html: privacyText }}></div>
           </Box>
         </Grid>
         <Grid item xs={12}>
