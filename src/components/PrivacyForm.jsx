@@ -45,7 +45,7 @@ export default function PaymentForm(props) {
               border: "1px solid grey",
             }}
           >
-            <div dangerouslySetInnerHTML={{ __html: privacyText }}></div>;
+            <div dangerouslySetInnerHTML={{ __html: privacyText }}></div>
           </Box>
         </Grid>
         <Grid item xs={12}>
@@ -53,9 +53,8 @@ export default function PaymentForm(props) {
             control={
               <Checkbox
                 onChange={(event) => props.setChecked(event.target.checked)}
-                color="secondary"
                 name="checkbox"
-                value="yes"
+                checked={props.checked}
               />
             }
             label="이용약관 및 개인정보 처리방침에 동의합니다."

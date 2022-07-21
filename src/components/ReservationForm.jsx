@@ -5,11 +5,7 @@ import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
 import { useState } from "react";
 import styled from "styled-components";
-
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { Box } from "@mui/material";
+import { DateTimePicker } from "react-rainbow-components";
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -34,14 +30,13 @@ export default function AddressForm(props) {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
-    const joinData = {
+    const userData = {
       name: data.get("name"),
       phone: data.get("phone"),
-      id: data.get("id"),
       password: data.get("password"),
       rePassword: data.get("rePassword"),
     };
-    const { name, phone, id, password, rePassword } = joinData;
+    const { name, phone, password, rePassword } = userData;
     // 이름 유효성 체크
     const nameRegex = /^[가-힣a-zA-Z]+$/;
     if (!nameRegex.test(name) || name.length < 1)
@@ -82,45 +77,30 @@ export default function AddressForm(props) {
         예약 정보
       </Typography>
       <Grid container spacing={4}>
-        <Grid item xs={12} sm={12} sx={{ mt: 3 }}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Box
-              container
-              sx={{
-                display: {
-                  xs: "flex",
-                  justifyContent: "space-evenly",
-                },
-              }}
-            >
-              <Box>
-                <DateTimePicker
-                  renderInput={(params) => <TextField {...params} />}
-                  label="예약 시작 시간"
-                  value={startValue}
-                  onChange={(newValue) => {
-                    setStartValue(newValue);
-                  }}
-                  minDateTime={new Date()}
-                  minutesStep="15"
-                />
-              </Box>
-              <Box>
-                <DateTimePicker
-                  renderInput={(params) => <TextField {...params} />}
-                  label="예약 종료 시간"
-                  value={endValue}
-                  onChange={(newValue) => {
-                    setEndValue(newValue);
-                  }}
-                  minDateTime={new Date(startValue)}
-                  minutesStep="15"
-                />
-              </Box>
-            </Box>
-          </LocalizationProvider>
+        <Grid item xs={6}>
+          <DateTimePicker
+            label="예약 시작시간"
+            value={startValue}
+            onChange={(newValue) => {
+              setStartValue(newValue);
+            }}
+            minDate={new Date()}
+            required
+          />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={6}>
+          <DateTimePicker
+            label="예약 종료시간"
+            value={endValue}
+            onChange={(newValue) => {
+              setEndValue(newValue);
+            }}
+            minDate={startValue}
+            required
+          />
+        </Grid>
+
+        <Grid item xs={12}>
           <TextField
             autoComplete="given-name"
             variant="standard"
