@@ -140,7 +140,7 @@ export default function Checkout(props) {
             <Typography variant="h4" align="center">
               농구장 예약
             </Typography>
-            <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+            <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 3 }}>
               {steps.map((label) => (
                 <Step key={label}>
                   <StepLabel>{label}</StepLabel>

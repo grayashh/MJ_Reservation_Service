@@ -5,7 +5,9 @@ import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
 import { useState } from "react";
 import styled from "styled-components";
-import { DateTimePicker } from "react-rainbow-components";
+import { DateTimePicker, CounterInput } from "react-rainbow-components";
+
+import Calendar from "./Calendar";
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -19,6 +21,7 @@ export default function AddressForm(props) {
 
   const [startValue, setStartValue] = React.useState(new Date());
   const [endValue, setEndValue] = React.useState(new Date());
+  const [headCounter, setCounter] = useState();
 
   const [nameError, setNameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
@@ -77,6 +80,9 @@ export default function AddressForm(props) {
         예약 정보
       </Typography>
       <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Calendar />
+        </Grid>
         <Grid item xs={6}>
           <DateTimePicker
             label="예약 시작시간"
@@ -99,7 +105,18 @@ export default function AddressForm(props) {
             required
           />
         </Grid>
-
+        <Grid item xs={12}>
+          <CounterInput
+            id="headcount"
+            label="예약 인원"
+            labelAlignment="center"
+            value={headCounter}
+            onChange={setCounter}
+            placeholder="최소 10인 이상 예약가능 합니다."
+            min={10}
+            max={30}
+          ></CounterInput>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             autoComplete="given-name"
