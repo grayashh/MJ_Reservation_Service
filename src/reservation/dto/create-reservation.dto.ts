@@ -1,31 +1,24 @@
-import { IsNumber, IsString, IsDate, IsNotEmpty } from 'class-validator';
+import { IsNumber, IsString, IsDate } from 'class-validator';
 
 export class CreateReservationDto {
   @IsString()
-  @IsNotEmpty()
   readonly name: string;
 
   @IsString()
-  @IsNotEmpty()
   readonly phone: string;
 
   @IsString()
-  @IsNotEmpty()
   readonly password: string;
 
   @IsNumber()
-  @IsNotEmpty()
   readonly headcount: number;
 
   @IsString()
-  @IsNotEmpty()
   readonly court: string;
 
   @IsDate()
-  @IsNotEmpty()
-  readonly startDate: Date;
+  readonly startDate: string;
 
   @IsDate()
-  @IsNotEmpty()
-  readonly endDate: Date;
+  readonly endDate: string;
 }
