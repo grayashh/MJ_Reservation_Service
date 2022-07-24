@@ -36,7 +36,7 @@ function Main() {
             spacing={2}
             alignContent="center"
             sx={{
-              height: "90vh",
+              height: "100vh",
             }}
           >
             <Article />

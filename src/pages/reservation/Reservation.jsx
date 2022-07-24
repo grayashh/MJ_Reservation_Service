@@ -106,7 +106,7 @@ export default function Checkout(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (activeStep == 1) {
+    if (activeStep === 1) {
       if (
         props.nameRegex.test(props.name) &&
         props.phoneRegex.test(props.phone) &&
@@ -115,7 +115,11 @@ export default function Checkout(props) {
         checked
       ) {
         props.setOnHandlePost();
+      }else{
+        
       }
+
+
     }
     if (!checked) {
       Swal.fire({
