@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
 import { useState } from "react";
 import styled from "styled-components";
-import { DateTimePicker, CounterInput } from "react-rainbow-components";
+import { DateTimePicker, CounterInput, Select } from "react-rainbow-components";
 
 import Calendar from "./Calendar";
 
@@ -17,6 +17,11 @@ const FormHelperTexts = styled(FormHelperText)`
 `;
 
 export default function AddressForm(props) {
+  const options = [
+    { value: "LEFT", label: "오른쪽 농구장" },
+    { value: "RIGHT", label: "왼쪽 농구장" },
+  ];
+
   const [onhandlePost, setOnHandlePost] = useState(false);
 
   const [startValue, setStartValue] = React.useState(new Date());
@@ -107,6 +112,7 @@ export default function AddressForm(props) {
         </Grid>
         <Grid item xs={12}>
           <CounterInput
+            required
             id="headcount"
             label="예약 인원"
             labelAlignment="center"
@@ -117,6 +123,10 @@ export default function AddressForm(props) {
             max={30}
           ></CounterInput>
         </Grid>
+        <Grid item xs={12}>
+          <Select label="장소를 선택하세요" required options={options}></Select>
+        </Grid>
+
         <Grid item xs={12}>
           <TextField
             autoComplete="given-name"
