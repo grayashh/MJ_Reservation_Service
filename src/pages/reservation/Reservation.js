@@ -52,6 +52,8 @@ async function onhandlePost(data) {
     password,
   };
 
+  console.log(postData);
+
   await axios
     .post("/reservation/court", { postData })
     .then((res) => {
@@ -90,8 +92,8 @@ export default function Checkout() {
   // 버튼 상태
 
   // 예약 정보
-  const [startValue, setStartValue] = React.useState(new Date());
-  const [endValue, setEndValue] = React.useState(new Date());
+  const [startValue, setStartValue] = useState(new Date());
+  const [endValue, setEndValue] = useState(new Date());
   const [headCounter, setCounter] = useState(6);
   const [area, setArea] = useState("RIGHT");
   const [name, setName] = useState("");
@@ -155,7 +157,6 @@ export default function Checkout() {
             area={area}
             name={name}
             phone={phone}
-            setPhone={setPhone}
           />
         );
       default:
@@ -165,6 +166,16 @@ export default function Checkout() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const userData = {
+      startValue,
+      endValue,
+      area,
+      headCounter,
+      name,
+      phone,
+      password,
+    };
 
     //개인정보 동의 checkbox 유효성 검사
     if (activeStep === 0) {
@@ -215,7 +226,7 @@ export default function Checkout() {
     }
     if (activeStep === 2) {
       if (event.target.id === "예약하기") {
-        onhandlePost();
+        onhandlePost(userData);
       }
     }
   };
@@ -268,6 +279,7 @@ export default function Checkout() {
                       type="submit"
                       variant="contained"
                       sx={{ mt: 3, ml: 1 }}
+                      onClick={(event) => handleSubmit(event)}
                     >
                       {buttonValue}
                     </Button>
