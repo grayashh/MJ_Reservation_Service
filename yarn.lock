@@ -1720,6 +1720,10 @@
   dependencies:
     unist-util-visit "^1.4.1"
 
+"@mobiscroll/react@https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-5.17.2.tgz":
+  version "5.17.2"
+  resolved "https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-5.17.2.tgz#a63cab537c1fe2df662bc704ea5922fac5ed39d8"
+
 "@mui/base@5.0.0-alpha.87":
   version "5.0.0-alpha.87"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.87.tgz#3cf8c2990cda8b48f26b3f19b1d0c94095ec6dfe"

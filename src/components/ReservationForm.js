@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
-import { useState } from "react";
 import styled from "styled-components";
 import { DateTimePicker, CounterInput, Select } from "react-rainbow-components";
 
@@ -18,65 +17,12 @@ const FormHelperTexts = styled(FormHelperText)`
 
 export default function AddressForm(props) {
   const options = [
-    { value: "LEFT", label: "오른쪽 농구장" },
-    { value: "RIGHT", label: "왼쪽 농구장" },
+    { value: "RIGHT", label: "오른쪽 농구장" },
+    { value: "LEFT", label: "왼쪽 농구장" },
   ];
 
-  const [onhandlePost, setOnHandlePost] = useState(false);
-
-  const [startValue, setStartValue] = React.useState(new Date());
-  const [endValue, setEndValue] = React.useState(new Date());
-  const [headCounter, setCounter] = useState();
-
-  const [nameError, setNameError] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-  const [passwordState, setPasswordState] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-  //form 전송
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const data = new FormData(event.currentTarget);
-    const userData = {
-      name: data.get("name"),
-      phone: data.get("phone"),
-      password: data.get("password"),
-      rePassword: data.get("rePassword"),
-    };
-    const { name, phone, password, rePassword } = userData;
-    // 이름 유효성 체크
-    const nameRegex = /^[가-힣a-zA-Z]+$/;
-    if (!nameRegex.test(name) || name.length < 1)
-      setNameError("올바른 이름을 입력해주세요.");
-    else setNameError("");
-
-    // 전화번호 유효성 체크
-    const phoneRegex = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
-    if (!phoneRegex.test(phone))
-      setPhoneError("올바른 전화번호를 입력해주세요.");
-    else setPhoneError("");
-
-    // 비밀번호 유효성 체크
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
-    if (!passwordRegex.test(password))
-      setPasswordState("영문자+숫자 조합으로 8자리 이상 입력해주세요.");
-    else setPasswordState("");
-
-    // 비밀번호 같은지 체크
-    if (password !== rePassword)
-      setPasswordError("비밀번호가 일치하지 않습니다.");
-    else setPasswordError("");
-
-    // 모두 통과하면 post되는 코드 실행
-    if (
-      nameRegex.test(name) &&
-      phoneRegex.test(phone) &&
-      passwordRegex.test(password) &&
-      password === rePassword
-    ) {
-      setOnHandlePost();
-    }
+  const handleOnSelect = (event) => {
+    props.setArea(event.target.value);
   };
 
   return (
@@ -91,9 +37,9 @@ export default function AddressForm(props) {
         <Grid item xs={6}>
           <DateTimePicker
             label="예약 시작시간"
-            value={startValue}
+            value={props.startValue}
             onChange={(newValue) => {
-              setStartValue(newValue);
+              props.setStartValue(newValue);
             }}
             minDate={new Date()}
             required
@@ -102,11 +48,11 @@ export default function AddressForm(props) {
         <Grid item xs={6}>
           <DateTimePicker
             label="예약 종료시간"
-            value={endValue}
+            value={props.endValue}
             onChange={(newValue) => {
-              setEndValue(newValue);
+              props.setEndValue(newValue);
             }}
-            minDate={startValue}
+            minDate={props.startValue}
             required
           />
         </Grid>
@@ -116,15 +62,21 @@ export default function AddressForm(props) {
             id="headcount"
             label="예약 인원"
             labelAlignment="center"
-            value={headCounter}
-            onChange={setCounter}
-            placeholder="최소 10인 이상 예약가능 합니다."
-            min={10}
+            value={props.headCounter}
+            onChange={props.setCounter}
+            placeholder="최소 6인 이상 예약가능 합니다."
+            min={6}
             max={30}
           ></CounterInput>
         </Grid>
         <Grid item xs={12}>
-          <Select label="장소를 선택하세요" required options={options}></Select>
+          <Select
+            label="장소를 선택하세요"
+            required
+            value={props.area}
+            options={options}
+            onChange={handleOnSelect}
+          ></Select>
         </Grid>
 
         <Grid item xs={12}>
@@ -136,24 +88,28 @@ export default function AddressForm(props) {
             fullWidth
             id="name"
             label="이름"
+            value={props.name}
+            onChange={(event) => props.setName(event.target.value)}
             autoFocus
-            error={nameError !== "" || false}
+            error={props.nameError !== "" || false}
           />
         </Grid>
-        <FormHelperTexts>{nameError}</FormHelperTexts>
+        <FormHelperTexts>{props.nameError}</FormHelperTexts>
         <Grid item xs={12}>
           <TextField
             required
             fullWidth
             variant="standard"
             id="phone"
-            label="전화번호(010-XXXX-XXXX)"
+            value={props.phone}
+            onChange={(event) => props.setPhone(event.target.value)}
+            label="전화번호 (010-XXXX-XXXX)"
             name="phone"
             autoComplete="phone"
-            error={phoneError !== "" || false}
+            error={props.phoneError !== "" || false}
           />
         </Grid>
-        <FormHelperTexts>{phoneError}</FormHelperTexts>
+        <FormHelperTexts>{props.phoneError}</FormHelperTexts>
         {/* 비밀번호 입력 폼 */}
         <Grid item xs={12}>
           <TextField
@@ -164,11 +120,13 @@ export default function AddressForm(props) {
             label="예약 확인용 비밀번호 (영문자+숫자 8자리 이상)"
             type="password"
             id="password"
+            value={props.password}
+            onChange={(event) => props.setPassword(event.target.value)}
             autoComplete="new-password"
-            error={passwordState !== "" || false}
+            error={props.passwordState !== "" || false}
           />
         </Grid>
-        <FormHelperTexts>{passwordState}</FormHelperTexts>
+        <FormHelperTexts>{props.passwordState}</FormHelperTexts>
 
         {/* 비밀번호 재입력 폼 */}
         <Grid item xs={12}>
@@ -180,11 +138,13 @@ export default function AddressForm(props) {
             label="비밀번호 재입력"
             type="password"
             id="rePassword"
+            value={props.rePassword}
+            onChange={(event) => props.setRePassword(event.target.value)}
             autoComplete="new-password"
-            error={passwordError !== "" || false}
+            error={props.passwordError !== "" || false}
           />
         </Grid>
-        <FormHelperTexts>{passwordError}</FormHelperTexts>
+        <FormHelperTexts>{props.passwordError}</FormHelperTexts>
       </Grid>
     </React.Fragment>
   );
