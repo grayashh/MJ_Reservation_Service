@@ -8,6 +8,7 @@ import { DateTimePicker, CounterInput, Select } from "react-rainbow-components";
 
 import Calendar from "./Calendar";
 
+// bottom Helper Text Style
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
   padding-left: 16px;
@@ -15,25 +16,32 @@ const FormHelperTexts = styled(FormHelperText)`
   color: #d32f2f !important;
 `;
 
-export default function AddressForm(props) {
+export default React.memo(function AddressForm(props) {
+  // 장소 data
   const options = [
     { value: "RIGHT", label: "오른쪽 농구장" },
     { value: "LEFT", label: "왼쪽 농구장" },
   ];
 
+  // 장소 handle setState
   const handleOnSelect = (event) => {
     props.setArea(event.target.value);
   };
 
   return (
     <React.Fragment>
+      {/* 제목 헤더 */}
       <Typography variant="h6" gutterBottom>
         예약 정보
       </Typography>
+
+      {/* 예약 캘린더 */}
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <Calendar />
         </Grid>
+
+        {/* 예약 시작시간 선택 폼 */}
         <Grid item xs={6}>
           <DateTimePicker
             label="예약 시작시간"
@@ -45,6 +53,8 @@ export default function AddressForm(props) {
             required
           />
         </Grid>
+
+        {/* 예약 종료시간 선택 폼 */}
         <Grid item xs={6}>
           <DateTimePicker
             label="예약 종료시간"
@@ -56,6 +66,8 @@ export default function AddressForm(props) {
             required
           />
         </Grid>
+
+        {/* 예약 인원 폼 */}
         <Grid item xs={12}>
           <CounterInput
             required
@@ -69,6 +81,8 @@ export default function AddressForm(props) {
             max={30}
           ></CounterInput>
         </Grid>
+
+        {/* 장소 선택 폼 */}
         <Grid item xs={12}>
           <Select
             label="장소를 선택하세요"
@@ -79,6 +93,7 @@ export default function AddressForm(props) {
           ></Select>
         </Grid>
 
+        {/* 이름 입력 폼 */}
         <Grid item xs={12}>
           <TextField
             autoComplete="given-name"
@@ -95,6 +110,8 @@ export default function AddressForm(props) {
           />
         </Grid>
         <FormHelperTexts>{props.nameError}</FormHelperTexts>
+
+        {/* 전화번호 입력 폼 */}
         <Grid item xs={12}>
           <TextField
             required
@@ -148,4 +165,4 @@ export default function AddressForm(props) {
       </Grid>
     </React.Fragment>
   );
-}
+});

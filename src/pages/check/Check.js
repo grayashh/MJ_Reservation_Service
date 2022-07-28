@@ -6,14 +6,17 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function Check() {
+  // 예약 비밀번호 확인 state
   const [value, setValue] = useState("");
 
+  // 비밀번호 입력 handle
   const handleOnChange = (event) => {
     setValue(event.target.value);
   };
 
   const navigate = useNavigate();
 
+  // post Data
   const onhandlePost = async (data) => {
     const { value } = data;
 
@@ -32,6 +35,7 @@ export default function Check() {
           showConfirmButton: false,
           timer: 1000,
         });
+        // 성공시 navigate
         navigate("/my/reservation");
       })
       .catch((err) => {
@@ -45,6 +49,7 @@ export default function Check() {
       });
   };
 
+  // submit 버튼 handle
   const handleSubmit = (event) => {
     event.preventDefault();
 

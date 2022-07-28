@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { WeeklyCalendar, Card } from "react-rainbow-components";
 import axios from "axios";
@@ -8,13 +8,14 @@ const StyledCard = styled(Card)`
   padding: 1rem;
 `;
 
-export default React.memo(function CustomWeeklyCalendar() {
+//  리렌더링 방지
+export default function CustomWeeklyCalendar() {
+  // 현재 주차 State, 예약 등록된 events State
   const [currentWeek, setCurrentWeek] = useState(new Date());
   const [events, setEvents] = useState([]);
 
-  //id, area, startDate, endDate
-  const EventsApiCall = async () => {
-    await axios
+  useEffect(() => {
+    axios
       .get("/events")
       .then((res) => {
         setEvents(res);
@@ -22,9 +23,10 @@ export default React.memo(function CustomWeeklyCalendar() {
       .catch((e) => {
         console.log(e);
       });
-  };
+    // 여기에 코드를 적자
+  }, [events]);
 
-  EventsApiCall();
+  //id, title(area), startDate, endDate 받아서 설정
 
   return (
     <StyledCard>
@@ -36,4 +38,4 @@ export default React.memo(function CustomWeeklyCalendar() {
       />
     </StyledCard>
   );
-});
+}

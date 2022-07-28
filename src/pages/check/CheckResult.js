@@ -15,14 +15,17 @@ import FadeIn from "react-fade-in/lib/FadeIn";
 import BackgroundVideo from "../../components/Background";
 
 const CheckResult = () => {
+  // user data State
   const [users, setUsers] = useState([]);
 
+  // user data 받아오고 set
   useEffect(() => {
     axios.get("/users").then((response) => {
       setUsers(response.data);
     });
-  }, []);
+  }, [users]);
 
+  // 코트 이름 변환
   let printArea = users.area === "RIGHT" ? "오른쪽 코트" : "왼쪽 코트";
 
   const theme = createTheme({
