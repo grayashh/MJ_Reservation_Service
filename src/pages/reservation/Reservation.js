@@ -17,6 +17,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import FadeIn from "react-fade-in/lib/FadeIn";
+import { useNavigate } from "react-router-dom";
 
 const steps = ["개인정보 동의", "예약정보 작성", "예약 완료"];
 
@@ -40,42 +41,44 @@ const theme = createTheme({
   },
 });
 
-async function onhandlePost(data) {
-  const { startValue, endValue, area, headCount, name, phone, password } = data;
-  const postData = {
-    startValue,
-    endValue,
-    area,
-    headCount,
-    name,
-    phone,
-    password,
-  };
-
-  console.log(postData);
-
-  await axios
-    .post("/reservation/court", { postData })
-    .then((res) => {
-      Swal.fire({
-        icon: "success",
-        title: "예약 성공",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-    })
-    .catch((err) => {
-      Swal.fire({
-        icon: "error",
-        iconColor: "#d32f2f",
-        title: "예약 실패",
-        text: "다시 시도해주세요",
-        confirmButtonColor: "#005cb8",
-      });
-    });
-}
-
 export default function Checkout() {
+  async function onhandlePost(data) {
+    const { startValue, endValue, area, headCount, name, phone, password } =
+      data;
+    const postData = {
+      startValue,
+      endValue,
+      area,
+      headCount,
+      name,
+      phone,
+      password,
+    };
+
+    console.log(postData);
+
+    await axios
+      .post("/reservation/court", { postData })
+      .then((res) => {
+        Swal.fire({
+          icon: "success",
+          title: "예약 성공",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        handleNext();
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          iconColor: "#d32f2f",
+          title: "예약 실패",
+          text: "다시 시도해주세요",
+          confirmButtonColor: "#005cb8",
+        });
+      });
+  }
+
   // Step State
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -213,6 +216,7 @@ export default function Checkout() {
         setPasswordError("비밀번호가 일치하지 않습니다.");
       else setPasswordError("");
 
+      // 유효성 체크 후 통과시 다음으로 넘어가기
       if (
         nameRegex.test(name) &&
         phoneRegex.test(phone) &&
@@ -224,12 +228,15 @@ export default function Checkout() {
       } else {
       }
     }
+
+    // 마지막에서 예약하기 버튼일 경우 onhandlePost
     if (activeStep === 2) {
       if (event.target.id === "예약하기") {
         onhandlePost(userData);
       }
     }
   };
+  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
@@ -251,13 +258,21 @@ export default function Checkout() {
               {activeStep === steps.length ? (
                 <React.Fragment>
                   <Typography variant="h5" gutterBottom>
-                    Thank you for your order.
+                    예약해주셔서 감사합니다.
                   </Typography>
                   <Typography variant="subtitle1">
-                    Your order number is #2001539. We have emailed your order
-                    confirmation, and will send you an update when your order
-                    has shipped.
+                    예약은 "내 예약 확인하기"에서 다시 확인하실 수 있습니다.
                   </Typography>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ mt: 3 }}
+                    onClick={() => {
+                      navigate("/check");
+                    }}
+                  >
+                    내 예약 확인하기
+                  </Button>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
