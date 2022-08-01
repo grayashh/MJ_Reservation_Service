@@ -7,21 +7,28 @@ import Swal from "sweetalert2";
 
 export default function Check() {
   // 예약 비밀번호 확인 state
-  const [value, setValue] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+
+  // 이름 입력 handle
+  const handleOnName = (event) => {
+    setName(event.target.value);
+  };
 
   // 비밀번호 입력 handle
-  const handleOnChange = (event) => {
-    setValue(event.target.value);
+  const handleOnPassword = (event) => {
+    setPassword(event.target.value);
   };
 
   const navigate = useNavigate();
 
   // post Data
   const onhandlePost = async (data) => {
-    const { value } = data;
+    const { name, password } = data;
 
     const postData = {
-      value,
+      name,
+      password,
     };
 
     console.log(postData);
@@ -54,7 +61,8 @@ export default function Check() {
     event.preventDefault();
 
     const Data = {
-      value,
+      name,
+      password,
     };
     onhandlePost(Data);
   };
@@ -74,9 +82,19 @@ export default function Check() {
       >
         <Grid item xs={12}>
           <Input
+            id="name"
+            label="이름을 입력하세요"
+            type="name"
+            onChange={handleOnName}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Input
+            id="password"
             label="예약 확인용 비밀번호를 입력하세요"
             type="password"
-            onChange={handleOnChange}
+            onChange={handleOnPassword}
           />
         </Grid>
         <Grid item xs={12}>
