@@ -91,7 +91,7 @@ const CheckResult = () => {
                     <TimelineMarker label="예약 인원" />
                     <Input
                       readOnly
-                      value={users.headCounter + "명"}
+                      value={users.headCount + "명"}
                       isCentered
                     ></Input>
                   </Grid>
