@@ -13,10 +13,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Card, CardContent } from "@mui/material";
+import { CardContent } from "@mui/material";
 import Header from "../../components/Header";
 import BackgroundVideo from "../../components/Background";
 import FadeIn from "react-fade-in/lib/FadeIn";
+import { Card } from "react-rainbow-components";
 
 // mui의 css 우선순위가 높기때문에 important를 설정 - 실무하다 보면 종종 발생 우선순위 문제
 const FormHelperTexts = styled(FormHelperText)`
@@ -133,96 +134,96 @@ function Join() {
     <ThemeProvider theme={theme}>
       <Header />
       <FadeIn>
-      <Container sx={{ mt: 10 }} maxWidth="sm">
-        <Card>
-          <CardContent>
-            <Box sx={{ textAlign: "center" }}>
-              {/* 메인 제목 */}
-              <Typography component="h1" variant="h4">
-                문의사항
-              </Typography>
-              <Box
-                component="form"
-                noValidate
-                onSubmit={handleSubmit}
-                sx={{ mt: 6 }}
-              >
-                <FormControl component="fieldset" variant="standard">
-                  {/* 이름 입력 폼 */}
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <TextField
-                        autoComplete="given-name"
-                        name="name"
-                        required
-                        fullWidth
-                        id="name"
-                        label="이름"
-                        autoFocus
-                        error={nameError !== "" || false}
-                      />
-                    </Grid>
-                    <FormHelperTexts>{nameError}</FormHelperTexts>
+        <Container sx={{ mt: 10 }} maxWidth="sm">
+          <Card>
+            <CardContent>
+              <Box sx={{ textAlign: "center" }}>
+                {/* 메인 제목 */}
+                <Typography component="h1" variant="h4">
+                  문의사항
+                </Typography>
+                <Box
+                  component="form"
+                  noValidate
+                  onSubmit={handleSubmit}
+                  sx={{ mt: 4 }}
+                >
+                  <FormControl component="fieldset" variant="standard">
+                    {/* 이름 입력 폼 */}
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                        <TextField
+                          autoComplete="given-name"
+                          name="name"
+                          required
+                          fullWidth
+                          id="name"
+                          label="이름"
+                          autoFocus
+                          error={nameError !== "" || false}
+                        />
+                      </Grid>
+                      <FormHelperTexts>{nameError}</FormHelperTexts>
 
-                    {/* 전화번호 입력 폼 */}
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        id="phone"
-                        label="전화번호(010-XXXX-XXXX)"
-                        name="phone"
-                        autoComplete="phone"
-                        error={phoneError !== "" || false}
-                      />
-                    </Grid>
-                    <FormHelperTexts>{phoneError}</FormHelperTexts>
+                      {/* 전화번호 입력 폼 */}
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          id="phone"
+                          label="전화번호(010-XXXX-XXXX)"
+                          name="phone"
+                          autoComplete="phone"
+                          error={phoneError !== "" || false}
+                        />
+                      </Grid>
+                      <FormHelperTexts>{phoneError}</FormHelperTexts>
 
-                    {/* 아이디 입력 폼 */}
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        id="email"
-                        label="이메일"
-                        name="email"
-                        autoComplete="email"
-                        error={emailError !== "" || false}
-                      />
-                    </Grid>
-                    <FormHelperTexts>{emailError}</FormHelperTexts>
+                      {/* 아이디 입력 폼 */}
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          id="email"
+                          label="이메일"
+                          name="email"
+                          autoComplete="email"
+                          error={emailError !== "" || false}
+                        />
+                      </Grid>
+                      <FormHelperTexts>{emailError}</FormHelperTexts>
 
-                    {/* 내용 입력 폼 */}
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        multiline
-                        rows={8}
-                        name="message"
-                        label="내용"
-                        id="message"
-                      />
+                      {/* 내용 입력 폼 */}
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          multiline
+                          rows={8}
+                          name="message"
+                          label="내용"
+                          id="message"
+                        />
+                      </Grid>
                     </Grid>
-                  </Grid>
 
-                  {/* 제출 버튼 */}
-                  <Button
-                    id="submit"
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 8 }}
-                    size="large"
-                  >
-                    제출
-                  </Button>
-                </FormControl>
+                    {/* 제출 버튼 */}
+                    <Button
+                      id="submit"
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 4 }}
+                      size="large"
+                    >
+                      제출
+                    </Button>
+                  </FormControl>
+                </Box>
               </Box>
-            </Box>
-          </CardContent>
-        </Card>
-      </Container>
+            </CardContent>
+          </Card>
+        </Container>
       </FadeIn>
       <BackgroundVideo />
     </ThemeProvider>
