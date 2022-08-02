@@ -74,8 +74,8 @@ export default React.memo(function AddressForm(props) {
             id="headcount"
             label="예약 인원"
             labelAlignment="center"
-            value={props.headCounter}
-            onChange={props.setCounter}
+            value={props.headCount}
+            onChange={props.setCount}
             placeholder="최소 6인 이상 예약가능 합니다."
             min={6}
             max={30}
@@ -85,7 +85,7 @@ export default React.memo(function AddressForm(props) {
         {/* 장소 선택 폼 */}
         <Grid item xs={12}>
           <Select
-            label="장소를 선택하세요"
+            label="장소를 선택하세요 (본관을 등졌을 때 기준)"
             required
             value={props.area}
             options={options}
