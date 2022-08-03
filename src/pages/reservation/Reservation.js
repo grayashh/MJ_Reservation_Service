@@ -97,7 +97,7 @@ export default function Checkout() {
   // 예약 정보
   const [startValue, setStartValue] = useState(new Date());
   const [endValue, setEndValue] = useState(new Date());
-  const [headCounter, setCounter] = useState(6);
+  const [headCount, setCount] = useState(6);
   const [area, setArea] = useState("RIGHT");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -124,39 +124,41 @@ export default function Checkout() {
         return <PrivacyForm setChecked={setChecked} checked={checked} />;
       case 1:
         return (
-          <ReservationForm
-            startValue={startValue}
-            setStartValue={setStartValue}
-            endValue={endValue}
-            setEndValue={setEndValue}
-            headCounter={headCounter}
-            setCounter={setCounter}
-            area={area}
-            setArea={setArea}
-            name={name}
-            setName={setName}
-            phone={phone}
-            setPhone={setPhone}
-            password={password}
-            setPassword={setPassword}
-            rePassword={rePassword}
-            setRePassword={setRePassword}
-            nameError={nameError}
-            setNameError={setNameError}
-            phoneError={phoneError}
-            setPhoneError={setPhoneError}
-            passwordState={passwordState}
-            setPasswordState={setPasswordState}
-            passwordError={passwordError}
-            setPasswordError={setPasswordError}
-          />
+          <FadeIn>
+            <ReservationForm
+              startValue={startValue}
+              setStartValue={setStartValue}
+              endValue={endValue}
+              setEndValue={setEndValue}
+              headCount={headCount}
+              setCount={setCount}
+              area={area}
+              setArea={setArea}
+              name={name}
+              setName={setName}
+              phone={phone}
+              setPhone={setPhone}
+              password={password}
+              setPassword={setPassword}
+              rePassword={rePassword}
+              setRePassword={setRePassword}
+              nameError={nameError}
+              setNameError={setNameError}
+              phoneError={phoneError}
+              setPhoneError={setPhoneError}
+              passwordState={passwordState}
+              setPasswordState={setPasswordState}
+              passwordError={passwordError}
+              setPasswordError={setPasswordError}
+            />
+          </FadeIn>
         );
       case 2:
         return (
           <Result
             startValue={startValue}
             endValue={endValue}
-            headCounter={headCounter}
+            headCount={headCount}
             area={area}
             name={name}
             phone={phone}
@@ -174,7 +176,7 @@ export default function Checkout() {
       startValue,
       endValue,
       area,
-      headCounter,
+      headCount,
       name,
       phone,
       password,

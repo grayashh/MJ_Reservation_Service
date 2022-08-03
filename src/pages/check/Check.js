@@ -42,7 +42,7 @@ export default function Check() {
     console.log(postData);
 
     await axios
-      .post("/reservation/check", { postData })
+      .post("/check", { postData })
       .then((res) => {
         Swal.fire({
           icon: "success",
