@@ -1,5 +1,5 @@
 import { Reservation } from './reservation.entity';
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateReservationDto } from 'src/reservation/dto/create-reservation.dto';
 import { Repository } from 'typeorm';
@@ -8,28 +8,40 @@ import { Repository } from 'typeorm';
 export class ReservationService {
   constructor(
     @InjectRepository(Reservation)
-    private reservationRepository: Repository<Reservation>,
+    private readonly reservationRepository: Repository<Reservation>,
   ) {}
   // create reservation
-  async create(reservationDto: CreateReservationDto): Promise<Reservation> {
-    return this.reservationRepository.save(reservationDto);
-  }
-  // find reservation
-  async find(
-    name: string,
-    phone: string,
-    password: string,
-  ): Promise<Reservation[]> {
-    const result = await this.reservationRepository.find({
-      where: {
-        name,
-        phone,
-        password,
-      },
-    });
-    if (!result) {
+  async create(reservationDto: CreateReservationDto): Promise<void> {
+    try {
+      await this.reservationRepository.create(reservationDto).save();
       return;
+    } catch (error: unknown) {
+      throw new InternalServerErrorException();
     }
-    return result;
+  }
+  // get all reservation information
+  async getAll(): Promise<Reservation[]> {
+    try {
+      return await this.reservationRepository.find();
+    } catch (error: unknown) {
+      throw new InternalServerErrorException();
+    }
+  }
+  // find reservation by name, password
+  async find(name: string, password: string): Promise<Reservation | boolean> {
+    try {
+      const result = await this.reservationRepository.findOne({
+        where: {
+          name,
+          password,
+        },
+      });
+      if (!result) {
+        return false;
+      }
+      return result;
+    } catch (error: unknown) {
+      throw new InternalServerErrorException();
+    }
   }
 }

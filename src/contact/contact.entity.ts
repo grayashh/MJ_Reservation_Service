@@ -6,10 +6,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Court } from './court.enum';
 
 @Entity()
-export class Reservation extends BaseEntity {
+export class Contact extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,19 +19,10 @@ export class Reservation extends BaseEntity {
   phone: string;
 
   @Column({ type: 'varchar', nullable: false })
-  password: string;
+  email: string;
 
-  @Column({ type: 'int', nullable: false })
-  headcount: number;
-
-  @Column({ type: 'varchar', nullable: false, default: Court.LEFT })
-  court: string;
-
-  @Column()
-  startDate: string;
-
-  @Column()
-  endDate: string;
+  @Column({ type: 'varchar', nullable: false })
+  message: string;
 
   @CreateDateColumn()
   createdAt: Date;

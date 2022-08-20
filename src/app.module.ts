@@ -4,9 +4,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ReservationModule } from './reservation/reservation.module';
 import { typeORMConfig } from './config/typeorm.config';
+import { ContactModule } from './contact/contact.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeORMConfig), ReservationModule],
+  imports: [
+    TypeOrmModule.forRoot(typeORMConfig),
+    ReservationModule,
+    ContactModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
