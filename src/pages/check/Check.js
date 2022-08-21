@@ -58,7 +58,7 @@ export default function Check() {
           timer: 1000,
         });
         // 성공시 navigate
-        navigate("/my/reservation", users);
+        navigate("/my/reservation", { users: users });
       })
       .catch(() => {
         Swal.fire({
