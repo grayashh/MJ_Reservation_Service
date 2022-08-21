@@ -10,13 +10,8 @@ import { ThemeProvider } from "@mui/material";
 import Header from "../../components/Header";
 import FadeIn from "react-fade-in/lib/FadeIn";
 import BackgroundVideo from "../../components/Background";
-import { useLocation } from "react-router-dom";
 
-const CheckResult = () => {
-  const location = useLocation();
-
-  const users = location.users;
-
+export default function CheckResult({ users }) {
   // 코트 이름 변환
   let printArea = users.court === "RIGHT" ? "오른쪽 코트" : "왼쪽 코트";
 
@@ -106,6 +101,4 @@ const CheckResult = () => {
       <BackgroundVideo />
     </ThemeProvider>
   );
-};
-
-export default CheckResult;
+}

@@ -4,7 +4,6 @@ import NotFound from "./pages/error/NotFound";
 import Reservation from "./pages/reservation/Reservation";
 import Contact from "./pages/contact/Contact";
 import Check from "./pages/check/Check";
-import CheckResult from "./pages/check/CheckResult";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -15,7 +14,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/check" element={<Check />} />
-          <Route path="/my/reservation" element={<CheckResult />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/reservation/court" element={<Reservation />} />
           <Route path="*" element={<NotFound />} />

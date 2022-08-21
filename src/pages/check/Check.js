@@ -1,129 +1,17 @@
-import { Grid, Container } from "@mui/material";
-import axios from "axios";
 import React, { useState } from "react";
-import { Application, Button, Input } from "react-rainbow-components";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import CheckResult from "./CheckResult";
+import UserCheck from "./UserCheck";
 
 export default function Check() {
-  const theme = {
-    rainbow: {
-      palette: {
-        brand: "#005cb8",
-      },
-    },
-  };
-
   // user data State
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState("");
 
-  // 예약 비밀번호 확인 state
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  // 조회 성공 allow
+  const [allow, setAllow] = useState(false);
 
-  // 이름 입력 handle
-  const handleOnName = (event) => {
-    setName(event.target.value);
-  };
-
-  // 비밀번호 입력 handle
-  const handleOnPassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const navigate = useNavigate();
-
-  // post Data
-  const onhandlePost = async (data) => {
-    const { name, password } = data;
-
-    const postData = {
-      name,
-      password,
-    };
-
-    console.log(postData);
-
-    await axios
-      .post("/check", { postData })
-      .then(() => {
-        // user data 받아오고 set
-        axios.get("/users").then((res) => {
-          setUsers(res.data);
-        });
-        Swal.fire({
-          icon: "success",
-          title: "조회 성공",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        // 성공시 navigate
-        navigate("/my/reservation", { users: users });
-      })
-      .catch(() => {
-        Swal.fire({
-          icon: "error",
-          iconColor: "#d32f2f",
-          title: "조회 실패",
-          text: "다시 시도해주세요",
-          confirmButtonColor: "#005cb8",
-        });
-      });
-  };
-
-  // submit 버튼 handle
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const Data = {
-      name,
-      password,
-    };
-    onhandlePost(Data);
-  };
-
-  return (
-    <Application theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <Grid
-          container
-          sx={{
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            alignContent: "center",
-          }}
-          spacing={1}
-        >
-          <Grid item xs={12}>
-            <Input
-              id="name"
-              label="이름을 입력하세요"
-              type="name"
-              onChange={handleOnName}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <Input
-              id="password"
-              label="예약 확인용 비밀번호를 입력하세요"
-              type="password"
-              onChange={handleOnPassword}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              shaded
-              type="submit"
-              variant="brand"
-              label="제출"
-              onClick={(event) => handleSubmit(event)}
-            />
-          </Grid>
-        </Grid>
-      </Container>
-    </Application>
+  return !allow ? (
+    <UserCheck setAllow={setAllow} setUsers={setUsers} />
+  ) : (
+    <CheckResult users={users} />
   );
 }
