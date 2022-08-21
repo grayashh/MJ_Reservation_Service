@@ -9,4 +9,5 @@ export const typeORMConfig: TypeOrmModuleOptions = {
   database: 'mj-reservation-service',
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: true,
+  timezone: 'Asia/Seoul',
 };

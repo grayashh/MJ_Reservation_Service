@@ -1,4 +1,5 @@
 import { IsNumber, IsString, IsDate, IsNotEmpty } from 'class-validator';
+import { Court } from '../court.enum';
 
 export class CreateReservationDto {
   @IsString()
@@ -16,7 +17,7 @@ export class CreateReservationDto {
   readonly headcount: number;
 
   @IsString()
-  readonly court: string;
+  readonly court: Court;
 
   @IsDate()
   readonly startDate: string;

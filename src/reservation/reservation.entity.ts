@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Court } from './court.enum';
 
 @Entity()
 export class Reservation extends BaseEntity {
@@ -25,14 +24,14 @@ export class Reservation extends BaseEntity {
   @Column({ type: 'int', nullable: false })
   headcount: number;
 
-  @Column({ type: 'varchar', nullable: false, default: Court.LEFT })
+  @Column({ type: 'varchar', nullable: false })
   court: string;
 
-  @Column()
-  startDate: string;
+  @Column({ type: 'timestamp', nullable: false })
+  startDate: Date;
 
-  @Column()
-  endDate: string;
+  @Column({ type: 'timestamp', nullable: false })
+  endDate: Date;
 
   @CreateDateColumn()
   createdAt: Date;
