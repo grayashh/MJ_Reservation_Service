@@ -1,8 +1,5 @@
 import { Container, createTheme, Grid, Paper, Typography } from "@mui/material";
-import axios from "axios";
 import * as React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
 import {
   ActivityTimeline,
   DateTimePicker,
@@ -14,19 +11,9 @@ import Header from "../../components/Header";
 import FadeIn from "react-fade-in/lib/FadeIn";
 import BackgroundVideo from "../../components/Background";
 
-const CheckResult = () => {
-  // user data State
-  const [users, setUsers] = useState([]);
-
-  // user data 받아오고 set
-  useEffect(() => {
-    axios.get("/users").then((response) => {
-      setUsers(response.data);
-    });
-  }, [users]);
-
+export default function CheckResult({ users }) {
   // 코트 이름 변환
-  let printArea = users.area === "RIGHT" ? "오른쪽 코트" : "왼쪽 코트";
+  let printArea = users.court === "RIGHT" ? "오른쪽 코트" : "왼쪽 코트";
 
   const theme = createTheme({
     palette: {
@@ -66,7 +53,7 @@ const CheckResult = () => {
                     <TimelineMarker label="예약 시작시간" />
                     <DateTimePicker
                       readOnly
-                      value={new Date(users.startValue)}
+                      value={new Date(users.startDate)}
                       isCentered
                       icon=" "
                     />
@@ -76,7 +63,7 @@ const CheckResult = () => {
                     <TimelineMarker label="예약 종료시간" />
                     <DateTimePicker
                       readOnly
-                      value={new Date(users.endValue)}
+                      value={new Date(users.endDate)}
                       isCentered
                       icon=" "
                     />
@@ -91,7 +78,7 @@ const CheckResult = () => {
                     <TimelineMarker label="예약 인원" />
                     <Input
                       readOnly
-                      value={users.headCount + "명"}
+                      value={users.headcount + "명"}
                       isCentered
                     ></Input>
                   </Grid>
@@ -114,6 +101,4 @@ const CheckResult = () => {
       <BackgroundVideo />
     </ThemeProvider>
   );
-};
-
-export default CheckResult;
+}
