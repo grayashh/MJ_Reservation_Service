@@ -51,7 +51,6 @@ export default function UserCheck(props) {
           showConfirmButton: false,
           timer: 1000,
         });
-        // 성공시 navigate
       })
       .catch(() => {
         Swal.fire({
